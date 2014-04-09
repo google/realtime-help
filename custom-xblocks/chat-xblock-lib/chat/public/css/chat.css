@@ -1,0 +1,11 @@
+.candy-iframe {
+  border: 1px solid #bbb;
+  border-radius: 5px;
+  height: 500px;
+  margin: 30px 5% 0 5%;
+  width: 90%;
+}
+
+.pull-right {
+  float: right;
+}

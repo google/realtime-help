@@ -1,0 +1,28 @@
+<div>
+  <h3>Help Chat</h3>
+  <hr>
+  <div class="get-help-prompt">
+    <p>
+      Ask for help with this part of the course by typing
+      in your question below. Other students currently
+      online who have offered to help-chat with others may
+      see your question and help you quickly resolve it.
+    </p>
+
+    <form class="chat-form" onsubmit="return false;">
+      <input type="text" class="question-text" 
+             name="question" size="60" placeholder="Type your question here."/>
+      <br><br>
+      <input type="submit" value="Submit">
+    </form>
+  </div>
+
+  <div class="chat-session" style="display: none;" data-room-id="{{room_id}}">
+    <span class="asker"></span>
+    asked a question...
+
+    <button class="close-chat pull-right">Close chat</button>
+
+    <iframe class="candy-iframe"></iframe>
+  </div>
+</div>

@@ -1,0 +1,3 @@
+chat_xblock.egg-info/
+**/public/lib
+*.pyc

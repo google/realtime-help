@@ -1,0 +1,50 @@
+<html>
+  <head>
+    <link href="{{CANDY_LIB_URL}}/res/default.css"
+          rel="stylesheet" type="text/css">
+
+    <script src="https://code.jquery.com/jquery-1.7.2.min.js"></script>
+    <script src="{{CANDY_LIB_URL}}/libs/libs.min.js"></script>
+    <script src="{{CANDY_LIB_URL}}/candy.bundle.js"></script>
+    <script>
+      $(document).ready(function() {
+        var CHAT_DATA_BIND_ENDPOINT = JSON.parse(
+          '{{CHAT_DATA_BIND_ENDPOINT|js_string}}');
+        var ROOM_SERVER_NAME = JSON.parse('{{ROOM_SERVER_NAME|js_string}}');
+        var SERVER_NAME = JSON.parse('{{SERVER_NAME|js_string}}');
+        var CANDY_LIB_URL = JSON.parse('{{CANDY_LIB_URL|js_string}}');
+        var roomId = JSON.parse('{{room_id|js_string}}');
+        var userId = JSON.parse('{{user_id|js_string}}');
+        var displayName = JSON.parse('{{display_name|js_string}}');
+        var encodedSubject = JSON.parse('{{subject|js_string}}');
+
+        var roomJid = roomId + '@' + ROOM_SERVER_NAME;
+
+        if (encodedSubject) {
+          $(Candy).on('candy:view.room.after-add', function() {
+            var subject = decodeURIComponent(encodedSubject);
+            Candy.Core.Action.Jabber.Room.Message(
+              roomJid, subject, 'groupchat');
+          });
+        }
+
+        // The Candy object is supplied by the candy.bundle.js import.
+        Candy.init(CHAT_DATA_BIND_ENDPOINT, {
+          core: {
+            debug: false,
+            autojoin: [roomJid]
+          },
+          view: { resources: CANDY_LIB_URL + '/res/' }
+        });
+        Candy.about.name = 'Candy';
+        Candy.Core.connect(
+          userId + '@' + SERVER_NAME, userId, displayName);
+      });
+    </script>
+  </head>
+
+  <body>
+    <div id="candy">
+    </div>
+  </body>
+</html>

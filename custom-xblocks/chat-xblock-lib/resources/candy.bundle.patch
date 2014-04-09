@@ -1,0 +1,61 @@
+From 6b9bb3661e72a95337863d76d63acf10670ff8a3 Mon Sep 17 00:00:00 2001
+From: Sean Lip <sll@google.com>
+Date: Wed, 2 Apr 2014 18:58:32 -0700
+Subject: [PATCH] create patch
+
+---
+ candy.bundle.js | 12 +++++-------
+ 1 file changed, 5 insertions(+), 7 deletions(-)
+ mode change 100644 => 100755 candy.bundle.js
+
+diff --git a/candy.bundle.js b/candy.bundle.js
+old mode 100644
+new mode 100755
+index 1fd64c7..4a76250
+--- a/candy.bundle.js
++++ b/candy.bundle.js
+@@ -4306,8 +4306,6 @@ Candy.View.Pane = function(self, $) {
+                 // Presence of client
+                 if (currentUser !== undefined && currentUser.getNick() === user.getNick()) {
+                     self.Room.setUser(roomJid, user);
+-                } else {
+-                    $("#user-" + roomId + "-" + userId).click(self.Roster.userClick);
+                 }
+                 $("#user-" + roomId + "-" + userId + " .context").click(function(e) {
+                     self.Chat.Context.show(e.currentTarget, roomJid, user);
+@@ -4596,15 +4594,15 @@ Candy.View.Template = function(self) {
+         unreadmessages: "({{count}}) {{title}}"
+     };
+     self.Chat = {
+-        pane: '<div id="chat-pane">{{> tabs}}{{> toolbar}}{{> rooms}}</div>{{> modal}}',
++        pane: '<div id="chat-pane" style="margin-top: 7px;"><span style="color: white; margin-left: 5px; margin-top: 5px;">Help Chat</span>{{> rooms}}</div>',
+         rooms: '<div id="chat-rooms" class="rooms"></div>',
+         tabs: '<ul id="chat-tabs"></ul>',
+         tab: '<li class="roomtype-{{roomType}}" data-roomjid="{{roomJid}}" data-roomtype="{{roomType}}">' + '<a href="#" class="label">{{#privateUserChat}}@{{/privateUserChat}}{{name}}</a>' + '<a href="#" class="transition"></a><a href="#" class="close">×</a>' + '<small class="unread"></small></li>',
+         modal: '<div id="chat-modal"><a id="admin-message-cancel" class="close" href="#">×</a>' + '<span id="chat-modal-body"></span>' + '<img src="{{resourcesPath}}img/modal-spinner.gif" id="chat-modal-spinner" />' + '</div><div id="chat-modal-overlay"></div>',
+         adminMessage: '<li><small>{{time}}</small><div class="adminmessage">' + '<span class="label">{{sender}}</span>' + '<span class="spacer">▸</span>{{subject}} {{message}}</div></li>',
+         infoMessage: '<li><small>{{time}}</small><div class="infomessage">' + '<span class="spacer">•</span>{{subject}} {{message}}</div></li>',
+-        toolbar: '<ul id="chat-toolbar">' + '<li id="emoticons-icon" data-tooltip="{{tooltipEmoticons}}"></li>' + '<li id="chat-sound-control" class="checked" data-tooltip="{{tooltipSound}}">{{> soundcontrol}}</li>' + '<li id="chat-autoscroll-control" class="checked" data-tooltip="{{tooltipAutoscroll}}"></li>' + '<li class="checked" id="chat-statusmessage-control" data-tooltip="{{tooltipStatusmessage}}">' + '</li><li class="context" data-tooltip="{{tooltipAdministration}}"></li>' + '<li class="usercount" data-tooltip="{{tooltipUsercount}}">' + '<span id="chat-usercount"></span></li></ul>',
+-        soundcontrol: '<script type="text/javascript">var audioplayerListener = new Object();' + " audioplayerListener.onInit = function() { };" + '</script><object id="chat-sound-player" type="application/x-shockwave-flash" data="{{resourcesPath}}audioplayer.swf"' + ' width="0" height="0"><param name="movie" value="{{resourcesPath}}audioplayer.swf" /><param name="AllowScriptAccess"' + ' value="always" /><param name="FlashVars" value="listener=audioplayerListener&amp;mp3={{resourcesPath}}notify.mp3" />' + "</object>",
++        toolbar: '<ul id="chat-toolbar">' + '<li id="emoticons-icon" data-tooltip="{{tooltipEmoticons}}"></li>' + '<li id="chat-sound-control" class="checked" data-tooltip="{{tooltipSound}}">{{> soundcontrol}}</li>' + '<li id="chat-autoscroll-control" class="checked" data-tooltip="{{tooltipAutoscroll}}"></li>' + '<li class="checked" id="chat-statusmessage-control" data-tooltip="{{tooltipStatusmessage}}">' + '</li>' + '<li class="usercount" data-tooltip="{{tooltipUsercount}}">' + '<span id="chat-usercount"></span></li></ul>',
++        soundcontrol: '\x3cscript type="text/javascript">var audioplayerListener = new Object();' + " audioplayerListener.onInit = function() { };" + '\x3c/script><object id="chat-sound-player" type="application/x-shockwave-flash" data="{{resourcesPath}}audioplayer.swf"' + ' width="0" height="0"><param name="movie" value="{{resourcesPath}}audioplayer.swf" /><param name="AllowScriptAccess"' + ' value="always" /><param name="FlashVars" value="listener=audioplayerListener&amp;mp3={{resourcesPath}}notify.mp3" />' + "</object>",
+         Context: {
+             menu: '<div id="context-menu"><i class="arrow arrow-top"></i>' + '<ul></ul><i class="arrow arrow-bottom"></i></div>',
+             menulinks: '<li class="{{class}}" id="context-menu-{{id}}">{{label}}</li>',
+@@ -4616,11 +4614,11 @@ Candy.View.Template = function(self) {
+     self.Room = {
+         pane: '<div class="room-pane roomtype-{{roomType}}" id="chat-room-{{roomId}}" data-roomjid="{{roomJid}}" data-roomtype="{{roomType}}">' + "{{> roster}}{{> messages}}{{> form}}</div>",
+         subject: '<li><small>{{time}}</small><div class="subject">' + '<span class="label">{{roomName}}</span>' + '<span class="spacer">▸</span>{{_roomSubject}} {{{subject}}}</div></li>',
+-        form: '<div class="message-form-wrapper">' + '<form method="post" class="message-form">' + '<input name="message" class="field" type="text" aria-label="Message Form Text Field" autocomplete="off" maxlength="1000" />' + '<input type="submit" class="submit" name="submit" value="{{_messageSubmit}}" /></form></div>'
++        form: '<div class="message-form-wrapper">' + '<form method="post" class="message-form" style="margin-bottom: 0;">' + '<input name="message" class="field" type="text" aria-label="Message Form Text Field" autocomplete="off" maxlength="1000" />' + '<input type="submit" class="submit" name="submit" value="{{_messageSubmit}}" /></form></div>'
+     };
+     self.Roster = {
+         pane: '<div class="roster-pane"></div>',
+-        user: '<div class="user role-{{role}} affiliation-{{affiliation}}{{#me}} me{{/me}}"' + ' id="user-{{roomId}}-{{userId}}" data-jid="{{userJid}}"' + ' data-nick="{{nick}}" data-role="{{role}}" data-affiliation="{{affiliation}}">' + '<div class="label">{{displayNick}}</div><ul>' + '<li class="context" id="context-{{roomId}}-{{userId}}">&#x25BE;</li>' + '<li class="role role-{{role}} affiliation-{{affiliation}}" data-tooltip="{{tooltipRole}}"></li>' + '<li class="ignore" data-tooltip="{{tooltipIgnored}}"></li></ul></div>'
++        user: '<div class="user role-{{role}} affiliation-{{affiliation}}{{#me}} me{{/me}}"' + ' id="user-{{roomId}}-{{userId}}" data-jid="{{userJid}}"' + ' data-nick="{{nick}}" data-role="{{role}}" data-affiliation="{{affiliation}}">' + '<div class="label">{{displayNick}}</div><ul>' + '<li class="role role-{{role}} affiliation-{{affiliation}}" data-tooltip="{{tooltipRole}}"></li>' + '<li class="ignore" data-tooltip="{{tooltipIgnored}}"></li></ul></div>'
+     };
+     self.Message = {
+         pane: '<div class="message-pane-wrapper"><ul class="message-pane"></ul></div>',
+--
+1.9.1.423.g4596e3a
+

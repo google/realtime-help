@@ -42,7 +42,7 @@ Requirements
 ------------
 
 You will need access to two servers: one for the ejabberd chat service and one
-for the edX platform. Documentation for ejabberd is available at the ejabberd_
+for the edX platform. Documentation_ for ejabberd is available at the ejabberd
 website. Please note that this code has only been tested on Ubuntu Linux
 12.04 servers.
 
@@ -57,7 +57,7 @@ script, which uses standard development tools, including ``git``.
 The code includes the strophejs_ library (v1.1.1), as well as a modified
 version of the Candy_ chat library (v1.6.0).
 
-.. _ejabberd: http://www.process-one.net/docs/ejabberd/guide_en.html
+.. _Documentation: http://www.process-one.net/docs/ejabberd/guide_en.html
 .. _78fe797e: https://github.com/edx/edx-platform/commit/78fe797e145a8fbc3baf01f9ff1dc70c411bc2de
 .. _strophejs: http://strophe.im/strophejs/
 .. _Candy: http://candy-chat.github.io/candy/

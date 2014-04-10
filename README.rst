@@ -153,7 +153,7 @@ nature of XBlocks and the edx-platform, you might instead wish to consult the
 latest installation instructions for XBlocks. Documentation for this can be
 found in the XBlock_ and edx-platform_ repos.
 
-  1.  Install edX as described in the official edX documentation_. (In
+  1.  Install edX as described in the official edX docs_. (In
       addition, you may wish to either sync to commit 78fe797e_ of
       ``edx-platform``, or modify the code in this repository so that it
       works with the version of ``edx-platform`` you installed. Instructions
@@ -246,7 +246,7 @@ found in the XBlock_ and edx-platform_ repos.
   Logs for the edX servers can be found in /edx/var/log/cms/edx.log and
   /edx/var/log/lms/edx.log .
 
-.. _documentation: https://github.com/edx/configuration/wiki/Single-AWS-server-installation-using-Amazon-Machine-Image
+.. _docs: https://github.com/edx/configuration/wiki/Single-AWS-server-installation-using-Amazon-Machine-Image
 .. _wiki: https://github.com/edx/configuration/wiki/edX-Managing-the-Production-Stack
 .. _78fe797e: https://github.com/edx/edx-platform/commit/78fe797e145a8fbc3baf01f9ff1dc70c411bc2de
 .. _commit: https://github.com/edx/edx-platform/pull/3192

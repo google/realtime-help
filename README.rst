@@ -8,12 +8,43 @@ course to ask each other for help with course material in real time.
 .. _edX: https://www.edx.org
 
 
+Description
+-----------
+
+In the offline world, students who are working together on a homework
+assignment can easily ask each other for help if they get stuck. However,
+in an online course, these students are generally not located in the same
+place, and they may be taking the course at different times. This makes it
+harder to replicate the real-time help experience, despite the fact that
+online courses tend to have many more participants, and therefore more people
+for a particular student to seek help from.
+
+This code repository contains a realtime-help XBlock (together with a
+notification service) that enables students to ask other students for help
+in real-time. Authors of edX courses can add this XBlock to a course page.
+When a student is stuck on a problem, he/she can type a question into this
+XBlock, which will then be broadcast to other students taking the course.
+The recipients of the broadcast can then join the original student’s chat
+room, and help him/her to address the problem.
+
+The code release is made up of an XBlock and a small Django app for
+broadcasting chat notifications. Both of these components make use of
+ejabberd_, a popular open-source instant messaging server, to keep track
+of rooms and student presence. The XBlock provides an interface that allows
+students to join and participate in chats on a specific course page, and the
+notification app runs on all course pages so that it can detect whether
+students are present in order to broadcast questions to them.
+
+.. _ejabberd: http://www.ejabberd.im/
+
+
 Requirements
 ------------
 
 You will need access to two servers: one for the ejabberd chat service and one
-for the edX platform. Documentation for ejabberd is available here_. Please
-note that this code has only been tested on Ubuntu Linux 12.04 servers.
+for the edX platform. Documentation for ejabberd is available at the ejabberd_
+website. Please note that this code has only been tested on Ubuntu Linux
+12.04 servers.
 
 Instructions for provisioning these servers are provided below. Please note
 that the code in this repository has been developed against commit 78fe797e_
@@ -23,12 +54,12 @@ later versions of the edX platform.
 For both servers, you will need a Bash environment to run the installation
 script, which uses standard development tools, including ``git``.
 
-The code includes the Strophe.js_ library (v1.1.1), as well as a modified
+The code includes the strophejs_ library (v1.1.1), as well as a modified
 version of the Candy_ chat library (v1.6.0).
 
-.. _here: http://www.process-one.net/docs/ejabberd/guide_en.html
+.. _ejabberd: http://www.process-one.net/docs/ejabberd/guide_en.html
 .. _78fe797e: https://github.com/edx/edx-platform/commit/78fe797e145a8fbc3baf01f9ff1dc70c411bc2de
-.. _js: http://strophe.im/strophejs/
+.. _strophejs: http://strophe.im/strophejs/
 .. _Candy: http://candy-chat.github.io/candy/
 
 
@@ -58,8 +89,8 @@ it should be possible to figure out what went wrong by examining these.
       section. Make a note of its location in the file system; you will need
       this later.
 
-      Note: If you are working in development mode, you can generate a
-      self-signed .PEM certificate file by following the instructions here_:
+      Note: If you are working in development mode, these instructions_ explain
+      how to generate a self-signed .PEM certificate file:
 
       ::
 
@@ -110,7 +141,7 @@ it should be possible to figure out what went wrong by examining these.
       If it returns a 406 error, ensure that the IP address you are making
       the request from is an allowed IP in the ``ejabberd.cfg`` file.
 
-.. _here: http://how2ssl.com/articles/openssl_commands_and_tips/
+.. _instructions: http://how2ssl.com/articles/openssl_commands_and_tips/
 
 
 Installation instructions for the edX server
@@ -126,7 +157,7 @@ found in the XBlock_ and edx-platform_ repos.
       addition, you may wish to either sync to commit 78fe797e_ of
       ``edx-platform``, or modify the code in this repository so that it
       works with the version of ``edx-platform`` you installed. Instructions
-      for syncing to a particular version can be found here_.)
+      for syncing to a particular version can be found on this wiki_ page.)
 
   2.  Navigate to the root of ``edx-platform``. This should be located in
       ``/edx/app/edxapp/edx-platform``.
@@ -216,12 +247,12 @@ found in the XBlock_ and edx-platform_ repos.
   /edx/var/log/lms/edx.log .
 
 .. _documentation: https://github.com/edx/configuration/wiki/Single-AWS-server-installation-using-Amazon-Machine-Image
-.. _here: https://github.com/edx/configuration/wiki/edX-Managing-the-Production-Stack
+.. _wiki: https://github.com/edx/configuration/wiki/edX-Managing-the-Production-Stack
 .. _78fe797e: https://github.com/edx/edx-platform/commit/78fe797e145a8fbc3baf01f9ff1dc70c411bc2de
 .. _commit: https://github.com/edx/edx-platform/pull/3192
 .. _guidelines: https://github.com/edx/configuration/wiki/edX-Managing-the-Production-Stack
 .. _XBlock: https://github.com/edx/XBlock
-.. _platform: https://github.com/edx/edx-platform/blob/master/docs/en_us/developers/source/xblocks.rst
+.. _edx-platform: https://github.com/edx/edx-platform/blob/master/docs/en_us/developers/source/xblocks.rst
 
 
 Adding chat functionality to the edX demo course
@@ -261,11 +292,13 @@ API as of April 1, 2014.
   4.  If this XBlock is incorporated into a course, all students will be able
       to send and respond to help requests. There is no functionality for
       allowing individual students to turn helpchat notifications off.
+  5.  Chat messages are not scoped to a particular course.
 
 In addition, please note that:
 
-  1. This code has not undergone an in-depth security review.
-  2. At most one help chat XBlock should be embedded in each course page.
+  1.  This code has not undergone an in-depth security review.
+  2.  The ejabberd server is not automatically provisioned.
+  3.  At most one help chat XBlock should be embedded in each course page.
 
 We hope that this code provides a useful base that others can
 build on and modify for use in their edX courses.
